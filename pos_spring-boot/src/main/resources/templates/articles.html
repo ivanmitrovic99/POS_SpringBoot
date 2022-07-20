@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>POS</title>
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color:#DCDCDC;">
+<div class="main">
+
+<br><br>
+<h3>Stavke sa računa:</h3>
+<table class="table table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+       		<th>Artikal ID</th>
+            <th>Naziv</th>
+            <th>Cena</th>
+            <th>Kolicina</th>
+            <th>Jedinica mere</th>
+            <th>Rok trajanja</th>
+            <th>Poreska oznaka</th>
+            <th>Poreska stopa</th>
+            <th></th>
+            <th></th>
+   </tr>
+  </thead>
+  <tbody>
+<tr  th:each="product,iterStat : ${listProducts}">
+<td th:text="${product.id}"></td>
+<td th:text="${product.name}"></td>
+<td th:text="${product.price}"></td>
+<td th:text="${listQuantities[iterStat.index]}"></td>
+<td th:text="${product.uom}"></td>
+<td th:text="${product.exp_date}"></td>
+<td th:text="${product.tax_symbol}"></td>
+<td th:text="${product.tax_rate}"></td> 
+<td th:text="${quantity}"></td>
+</tr>
+</tr>
+  
+  </tbody>
+</table>
+
+ <a href="/purchases"><button class="btn-primary">Nazad</button></a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>POS</title>
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body onload="onLoadAdmin()" style="background-color:#DCDCDC;">
+<nav class="sidenavbar">
+  <a  href="/home">Home</a>
+      <a  href="/purchase">Prodaja </a>
+      <a  href="/products">Artikli</a>
+      <a  href="/purchases">Računi</a>
+      <a  href="/customers">Kupci</a>
+      <a  href="/admin">Admin</a>
+      <a  href="/logout">Logout</a>
+  </div>
+</nav>
+<div class="main">
+<h3 class="mt-3">Pregled registrovanih korisnika:</h3>
+<br><br>
+<table class="table table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+       		<th>ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Godine</th>
+            <th>Broj telefona</th>
+            <th>Email</th>
+            <th>Uloga</th>
+            <th></th>
+            <th></th>
+   </tr>
+  </thead>
+  <tbody>
+<tr  th:each="cashier : ${listCashier}">
+<td th:text="${cashier.id}"></td>
+<td th:text="${cashier.username}"></td>
+<td th:text="${cashier.password}"></td>
+<td th:text="${cashier.age}"></td>
+<td th:text="${cashier.phone}"></td>
+<td th:text="${cashier.email}"></td>
+<td th:text="${cashier.role}"></td> 
+<td><a th:href="@{/admin/update/{id}(id=${cashier.id})}"><button type='button'  class='btn-success' >Izmeni</button></a></td>
+<td><a th:href="@{/admin/delete/{id}(id=${cashier.id})}"><button type='button'  class='btn-danger'>Izbrisi</button></a></td>     
+</tr>
+  
+  </tbody>
+</table>
+<div class="container">
+<div class="row mb-3 mt-5">
+<div class="col-sm-5 mr-3" style="border:1px solid black;">
+ <form action="/saveCashier" th:object="${cashier}" method="post">
+            <h3>Dodaj novog korisnika:</h3>
+            <tr>
+                  <td>  
+                    <input type="text" class="form-control" placeholder="Id" name="id" hidden value="99999" id="cashier_id" />
+                </td>
+                <label class="form-label"  >Username</label>
+                  <td>  
+                    <input type="text"  class="form-control" placeholder="Username" name="username" id="cashier_username" />
+                </td>
+                <label class="form-label"  >Password</label>
+                <td>  
+                    <input type="text"  class="form-control" placeholder="Password" name="password" id="cashier_password" />
+                </td>
+                <label class="form-label"  >Godine</label>
+                <td>  
+                    <input type="text"class="form-control" placeholder="Godine" name="age" id="cashier_age" />
+                </td>
+                <label class="form-label" >Telefon</label>
+                <td>  
+                    <input type="text"  class="form-control" placeholder="Telefon" name="phone" id="cashier_phone" />
+                </td>
+                <label class="form-label" >Email</label>
+                <td>  
+                    <input type="text"  class="form-control" placeholder="Email" name="email" id="cashier_email" />
+                </td>
+                <label class="form-label" >Adresa</label>
+                <td>  
+                    <input type="text"  class="form-control" placeholder="Adresa" name="address" id="cashier_address"/>
+                </td>
+                <label class="form-label" >Uloga</label>
+                <td>  
+                    <input type="text"  class="form-control" placeholder="Uloga" name="role" id="cashier_role"/>
+                </td>
+                 <tr>
+            <td><input name="submit" type="submit" value="Dodaj" class="btn-primary mt-3 mb-3" /></td>
+         </tr>
+                
+            </tr>
+
+</form>
+
+</div>
+<div class="col-sm-5" style="border:1px solid black;">
+ <form action="/savePost" th:object="${post}" method="post">
+            <tr><h3>Dodaj novi post:</h3>
+                  <td>  
+                    <input type="text" class="form-control" placeholder="Id" name="id" hidden value="99999" id="cashier_id" />
+                </td>
+                <label class="form-label"  >Sadrzaj</label>
+                  <td>  
+                    <textarea rows="5" cols="50" name="content"></textarea>
+                </td>
+                <label class="form-label"  >Autor</label>
+                <td>  
+                    <input type="text"  class="form-control" placeholder="Autor" name="author"  />
+                </td>
+                <label class="form-label"  >Datum</label>
+                <td>  
+                    <input type="text"class="form-control" placeholder="Datum" name="date" id="datePost" />
+                </td>
+             
+                 <tr>
+            <td><input name="submit" type="submit" value="Dodaj" class="btn-primary mt-3 mb-3" /></td>
+         </tr>
+                
+            </tr>
+
+</form>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>

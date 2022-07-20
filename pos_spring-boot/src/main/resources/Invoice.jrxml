@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="130af6ba-3b79-4aa9-a16e-5ea899adc18e">
+	<style name="Table_TH" mode="Opaque" backcolor="#CCB08F">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#E6DBCF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#F2EBE3"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="Dataset1" uuid="2029b5dd-29c4-4250-8f90-1c98dbb5ad49">
+		<parameter name="Parameter1" class="java.util.List"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="id" class="java.lang.Long"/>
+		<field name="name" class="java.lang.String"/>
+		<field name="price" class="java.lang.Float"/>
+		<field name="uom" class="java.lang.String"/>
+		<field name="tax_rate" class="java.lang.Float"/>
+		<field name="tax_symbol" class="java.lang.String"/>
+		<variable name="SumPdv" class="java.lang.String" calculation="Sum">
+			<variableExpression><![CDATA[$F{price}*Float.valueOf($F{tax_symbol})*($F{tax_rate}/100)]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="CollectionBeanParam" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="Parameter1" class="java.util.List"/>
+	<parameter name="Parameter2" class="com.project.pos_springboot.entity.Customer"/>
+	<parameter name="Parameter3" class="com.project.pos_springboot.entity.Cashier"/>
+	<parameter name="purchase" class="com.project.pos_springboot.entity.Purchase"/>
+	<parameter name="paid" class="java.lang.Float"/>
+	<parameter name="total_tax" class="java.lang.Float"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="110" y="20" width="168" height="30" uuid="924d6bea-dae2-4c3a-bde5-c149d68efaff"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Naziv preduzeca]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="110" height="80" uuid="c5443867-f6f9-408c-bb76-4e33659e0d70"/>
+				<imageExpression><![CDATA["https://dcassetcdn.com/design_img/3987175/838431/27840556/a9qgtnr1h8321t4afggmzbxpk0_image.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="350" y="20" width="195" height="21" uuid="24913005-a23f-4f56-a2fb-4d261e709309"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Adresa: Ulica Broj 5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="35" width="195" height="21" uuid="b02ceb49-30ee-4457-9021-3ee87a2d73d1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tel: 060/123-4567]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="50" width="195" height="21" uuid="3f39acaa-5b2b-408a-9010-1ee493a34baa"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Email: email@gmail.com]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="7" width="90" height="21" uuid="22dc03bd-7fd3-4da6-9d27-b711a4d0c8e1"/>
+				<text><![CDATA[PIB: 123456789]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="7" width="140" height="19" uuid="16512be0-ba86-4f2f-b236-b1bfab6b0363"/>
+				<text><![CDATA[Maticni broj: 987654321]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="8" width="111" height="19" uuid="d55602cf-0707-43a4-8e90-672443eaaa7d"/>
+				<text><![CDATA[Sifra delatnosti:100030]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="450" y="8" width="108" height="22" uuid="fab8268c-343e-44c7-8390-a43b03b8a45b"/>
+				<text><![CDATA[Registarski broj: 123456]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="1" backcolor="#030303" uuid="a05e8f81-b707-40e5-902f-9aea2b2cfaa1"/>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="144" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="130" height="19" uuid="2e9a397a-0c7c-4e89-81fd-1655c3aa08ed"/>
+				<text><![CDATA[Datum izdavanja racuna:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="51" width="182" height="19" uuid="4a4849e7-c87f-41fc-80ce-8822bf4f30b2"/>
+				<text><![CDATA[Mesto izdavanja/ otpremanja dobra:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="130" height="19" uuid="51eb9420-5664-4c1f-9563-723fa6ad3bd2"/>
+				<text><![CDATA[Nacin placanja:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="130" height="19" uuid="875764bb-f53c-4ecb-a523-673bb837b56a"/>
+				<text><![CDATA[Datum prometa dobara:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="1" backcolor="#030303" uuid="c1e4613a-d78f-4b85-a422-e46e0ad32782"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="164" y="49" width="106" height="19" uuid="f78e91e2-28c3-4e36-b534-8e3aef9b6766"/>
+				<text><![CDATA[Adresa Ulica Broj 3]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="162" y="29" width="110" height="20" uuid="576c2779-f8f8-4381-bcc6-f80bc1a3ed1a"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="90" width="110" height="20" uuid="e2d642fb-67bc-4c62-8a2b-c5581fb84be2"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="164" y="68" width="100" height="14" uuid="12b10361-6f11-4c6f-ad6a-97c6a5aade1f"/>
+				<text><![CDATA[VIRMANSKI DINARI]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="350" y="40" width="171" height="22" uuid="852bf40a-4ba8-456d-83e8-7984ea26fcf3"/>
+				<textFieldExpression><![CDATA[$P{Parameter2}.getName() + " " +$P{Parameter2}.getCompany()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="58" width="171" height="22" uuid="7e55a0b4-0c66-41ad-a83b-f9b7574935d2"/>
+				<textFieldExpression><![CDATA[$P{Parameter2}.getAddress()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="74" width="171" height="22" uuid="e8481096-a128-4450-80bd-be3f10927199"/>
+				<textFieldExpression><![CDATA[$P{Parameter2}.getEmail()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="88" width="171" height="22" uuid="5134632f-a775-417b-9d49-414c690504af"/>
+				<textFieldExpression><![CDATA["PIB: " + $P{Parameter2}.getPib()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="330" y="10" width="201" height="20" uuid="2f3205e2-6c0c-4af2-a433-ad3f86cbb806"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Podaci o kupcu:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="130" height="19" uuid="b0e7e7e2-e8ca-461f-a0f3-cff94526bd66"/>
+				<text><![CDATA[Kasir:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="112" width="100" height="17" uuid="68c35bc3-4a4e-475f-89f0-27e5e76d60c1"/>
+				<textFieldExpression><![CDATA[$P{Parameter3}.getUsername()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="100" width="149" height="18" uuid="4249259a-812a-400b-baac-5b4ca0d41c48"/>
+				<textFieldExpression><![CDATA["Matični broj: "+$P{Parameter2}.getCompanynum()]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="320" y="10" width="201" height="121" uuid="8672d6b5-c139-4c87-bb45-55407808f0d9"/>
+				<box padding="1">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="90" splitType="Stretch">
+			<componentElement>
+				<reportElement x="20" y="10" width="580" height="80" uuid="6ba5d4f5-5b6b-4a48-9852-35de75d830fd">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="dbf6894b-6a6e-4531-aac7-4b009a1a4468">
+						<dataSourceExpression><![CDATA[$P{CollectionBeanParam}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="30" uuid="68ee47e9-43e3-4124-bc6e-f8aba73b1b01">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="30" uuid="f6dc5bce-2a51-4ccd-953f-5613fb0c2142"/>
+								<text><![CDATA[Id]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="30" height="30" uuid="168df310-860a-4ab5-9678-4d970c4fc166"/>
+								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="91c3f4c5-78a3-4f2b-b038-f89239dd3a3d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="1fdd4a2f-5e63-4120-b4ca-1154a5bb8639"/>
+								<text><![CDATA[Naziv]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="7ab396b7-c79f-4c94-9c5a-7719f8664ceb"/>
+								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="731669db-076d-407a-b3e3-bd8b98ec0839">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="27205dfe-0708-49b3-8085-05988d621606"/>
+								<text><![CDATA[Cena]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="1211a66b-1e84-4392-a49a-8eb549cd44c4"/>
+								<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="8d89fe16-06c6-457f-a792-c20be6fd0136">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="8837d4ce-7856-4718-8be8-11d6386ca523"/>
+								<text><![CDATA[JM]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="30" uuid="43d36717-dd32-451f-aff4-91df0551e128"/>
+								<textFieldExpression><![CDATA[$F{uom}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="37df45a7-184c-45b6-9dc2-f81739384334">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="dbd11457-2b70-4b7e-aa16-3b3647f45f48"/>
+								<text><![CDATA[Kolicina]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="6c07e269-3f5d-4d73-87a1-c9fe8963bc2e"/>
+								<textFieldExpression><![CDATA[$F{tax_symbol}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="bfc3abcf-40ef-47f8-8c98-7d9f66dcf56b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="ae1cfad6-c681-4493-a8c4-e041d1aefeaf"/>
+								<text><![CDATA[Prodajna cena]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="e41100a3-6765-445e-97c3-976ce1d2e4e7"/>
+								<textFieldExpression><![CDATA[$F{price}*Float.valueOf($F{tax_symbol})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="eb7de53a-4a54-4329-819b-932f4ebe42db">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="83b80599-7105-4fe5-b0c4-3ff288996d38"/>
+								<text><![CDATA[Poreska stopa(%)]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="30" uuid="479fdd4c-1983-42b2-8dc8-5fd6d0031624"/>
+								<textFieldExpression><![CDATA[$F{tax_rate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="b999da14-9137-43e9-97f0-1a4b9c4b3084">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="52fa295e-4465-4f2b-8d9f-a2c3b48d465e"/>
+								<text><![CDATA[PDV]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="5db3f45a-175d-4bac-95ba-b2134ca19dd5"/>
+								<textFieldExpression><![CDATA[$F{price}*Float.valueOf($F{tax_symbol})*($F{tax_rate}/100)]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="9ff73fab-4405-4439-9d6b-2da9f59c88cb">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="e5b41b0d-008e-4600-8451-ec4a24792b09"/>
+								<text><![CDATA[Ukupno]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="06be77ce-c1a0-49f0-8160-90669c4c93f7"/>
+								<textFieldExpression><![CDATA[$F{price}*Float.valueOf($F{tax_symbol})+$F{price}*($F{tax_rate}/100)]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<rectangle>
+				<reportElement x="0" y="0" width="554" height="1" backcolor="#030303" uuid="8de92081-e4fa-4c9e-804a-02f5dacecb72"/>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="170" splitType="Stretch">
+			<staticText>
+				<reportElement x="50" y="20" width="112" height="20" uuid="223f4cd4-2ee5-45bf-a9a2-5f3c5aa7a1c1"/>
+				<text><![CDATA[Ukupan iznos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="40" width="112" height="20" uuid="4c4780e3-622f-4167-bdfc-4719ee1e36e0"/>
+				<text><![CDATA[Ukupna osnovica:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="60" width="112" height="20" uuid="aa595ec5-e6eb-424b-83dd-52fec8dd82b6"/>
+				<text><![CDATA[PDV:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="80" width="132" height="20" uuid="44014ce9-a092-4e84-aa45-aa2d2f21c328"/>
+				<text><![CDATA[Svega vrednost sa PDV-om:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="22" width="105" height="16" uuid="7f9b6e0b-870e-43f1-b7ea-75c6f2ee7e92"/>
+				<textFieldExpression><![CDATA[$P{purchase}.getTotal()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="42" width="105" height="16" uuid="d581fae4-f9bb-4b17-b6c2-3bd9462f0734"/>
+				<textFieldExpression><![CDATA[$P{purchase}.getTotal()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="63" width="100" height="14" uuid="8a4245d2-a298-40b8-873c-97281cdee892"/>
+				<textFieldExpression><![CDATA[$P{total_tax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="80" width="72" height="20" uuid="9eae4d02-6bde-42a5-87ba-e6bcbf3990bd"/>
+				<textFieldExpression><![CDATA[$P{total_tax}+$P{purchase}.getTotal()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="340" y="22" width="110" height="20" uuid="d3b64b8b-161d-4d55-bf6c-9cfbafe94b94"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ukupno za uplatu:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="22" width="72" height="20" uuid="4ae67b09-0243-4e08-abc0-cf531c16c987"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_tax}+$P{purchase}.getTotal()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="340" y="40" width="90" height="20" uuid="87f6b9dd-7feb-44d3-90a0-4601254bdef4"/>
+				<text><![CDATA[Uplaceno:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="42" width="105" height="16" uuid="20d0d5cf-1bc6-44af-9f5d-d0acedc2d5ac"/>
+				<textFieldExpression><![CDATA[$P{paid}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="340" y="60" width="90" height="20" uuid="32462645-616e-4bd2-9c6d-6e17119455f8"/>
+				<text><![CDATA[Povracaj:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="62" width="105" height="16" uuid="e4701254-2776-4b5d-a29a-15a2f1c4eaf2"/>
+				<textFieldExpression><![CDATA[$P{paid}-($P{purchase}.getTotal()+$P{total_tax})]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="30" y="20" width="251" height="80" uuid="a089e9c0-34ad-4305-a696-6ccb4d24f3ea"/>
+				<box padding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement x="319" y="20" width="236" height="81" uuid="7a46228b-a4b7-486e-afc5-b10b4cd55561"/>
+				<box padding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</frame>
+			<rectangle>
+				<reportElement x="-2" y="10" width="558" height="1" backcolor="#030303" uuid="dff0a7e5-1869-4162-ac3e-51335fa03306"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="116" width="501" height="41" uuid="303e0d4d-8a58-43a2-9359-51a92e71a6d0"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Uplatu izvrsiti na tekuci racun: 123-45678900201-41	
+Poziv po modelu 97 na broj: 63-213-3213
+						]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="67" splitType="Stretch">
+			<rectangle>
+				<reportElement x="20" y="31" width="161" height="1" backcolor="#030303" uuid="d5fc0330-b5d1-42a4-aefa-7710b272a0ad"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="30" width="161" height="1" backcolor="#030303" uuid="08d34af9-453f-4cd8-899b-4fe33921ea04"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="25" y="40" width="185" height="20" uuid="131b83ff-1cd6-4c03-8023-0f80f6c026f6"/>
+				<text><![CDATA[Robu izdao i fakturisao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="40" width="185" height="20" uuid="798ef196-c5b5-432f-a5a3-3bdf48ef8fcf"/>
+				<text><![CDATA[Robu/Racun primio]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

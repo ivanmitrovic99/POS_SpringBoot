@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>POS</title>
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body onload="onLoad()" style="background-color:#DCDCDC;">
+
+
+ <form action="/saveCashier" th:object="${cashier}" method="post">
+            <tr>
+            	<label class="form-label"  >Id</label>
+                  <td>  
+                    <input type="text" th:field="${cashier.id}" class="form-control" placeholder="Id" id="cashier_id" />
+                </td>
+                <label class="form-label"  >Username</label>
+                  <td>  
+                    <input type="text" th:field="${cashier.username}" class="form-control" id="cashier_username" />
+                </td>
+                <label class="form-label"  >Password</label>
+                <td>  
+                    <input type="text" th:field="${cashier.password}" class="form-control" id="cashier_password" />
+                </td>
+                <label class="form-label"  >Godine</label>
+                <td>  
+                    <input type="text" th:field="${cashier.age}" class="form-control"  id="cashier_age" />
+                </td>
+                <label class="form-label" >Telefon</label>
+                <td>  
+                    <input type="text" th:field="${cashier.phone}" class="form-control"  id="cashier_phone" />
+                </td>
+                <label class="form-label" >Email</label>
+                <td>  
+                    <input type="text" th:field="${cashier.email}" class="form-control" id="cashier_email" />
+                </td>
+                <label class="form-label" >Adresa</label>
+                <td>  
+                    <input type="text" th:field="${cashier.address}" class="form-control" id="cashier_address"/>
+                </td>
+                <label class="form-label" >Uloga</label>
+                <td>  
+                    <input type="text" th:field="${cashier.role}" class="form-control" id="cashier_role"/>
+                </td>
+                 <tr>
+            <td><input name="submit" type="submit" value="Izmeni" class="btn-primary mt-3 mb-3" /></td>
+         </tr>
+                
+            </tr>
+            
+          
+           
+         
+    </form>
+
+  
+  
+
+
+
+</body>
+</html>

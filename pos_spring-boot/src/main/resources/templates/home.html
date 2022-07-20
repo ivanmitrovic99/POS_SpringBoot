@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>POS</title>
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body onload="onLoad1()" style="background-color:#DCDCDC;">
+<nav class="sidenavbar">
+  <a  href="/home">Home</a>
+      <a  href="/purchase">Prodaja </a>
+      <a  href="/products">Artikli</a>
+      <a  href="/purchases">Računi</a>
+      <a  href="/customers">Kupci</a>
+      <a  href="/admin">Admin</a>
+      <a  href="/logout">Logout</a>
+  </div>
+</nav>
+<div class="main">
+<h1>Dobro došli, <th:block th:text="${user}"></th:block>.</h1>
+<h5 hidden>ID: <th:block th:text="${userid}"></th:block> </h3>
+<br><br>
+<h5>Novosti:</h5>
+<table class="table" style="width:100%">
+  <thead class="thead-dark">
+    <tr>
+   </tr>
+  </thead>
+  <tbody>
+<tr  th:each="post : ${listPosts}">
+<div class="card border-primary mb-3">
+<div class="card-header bg-transparent border-primary">Objavio: <th:block th:text="${post.author}"></th:block></div>
+ <div class="card-body text-dark">
+ <p class="card-text"><th:block th:text="${post.content}"></th:block></p></div>
+<div class="card-footer bg-transparent border-primary">Vreme objave: <th:block th:text="${post.date}"></th:block></div>
+</div>
+
+
+
+
+</tr>
+  
+  </tbody>
+</table>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>POS</title>
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{style.css}">
+</head>
+<body onload="onLoad()" style="background-color:#DCDCDC;">
+<nav class="sidenavbar">
+  <a  href="/home">Home</a>
+      <a  href="/purchase">Prodaja </a>
+      <a  href="/products">Artikli</a>
+      <a  href="/purchases">Računi</a>
+      <a  href="/customers">Kupci</a>
+      <a  href="/admin">Admin</a>
+      <a  href="/logout">Logout</a>
+  </div>
+</nav>
+<div class="main">
+<h3 class="pt-4" style="text-align:right; float:right;">Kasir: <th:block th:text="${user}"></th:block></h3>
+<h3 class="pt-4" style="text-align:right; float:right;" hidden>ID:<span id="cashier_id"><th:block th:text="${userid}"></th:block></span></h3>
+<h3 class="pt-4"> Nova prodaja</h3>
+ 
+<form action="#" th:action="@{/search}" th:object="${product}" method="post">
+        <div alight="left">
+            <tr>
+                <label class="form-label" >Pretraga proizvoda po ID-u:</label>
+                <td>
+                    <input type="text" th:field="*{id}" class="form-control" placeholder="Artikal ID" id="search" />
+                </td>
+            </tr>
+        </div>  
+ 	
+            <br>
+            <tr>
+            <td colspan="2"><button type="submit" class="btn btn-info"  onclick="load()">Pretraga</button> </td>
+            </tr> 
+            <div alight="left">
+            <tr>
+            <h3> Informacije o pronadjenom proizvodu:</h3>
+            	<label class="form-label"  >Id</label>
+                  <td>  
+                    <input type="text" th:field="${product.id}" class="form-control" placeholder="Id" id="product_id" readonly />
+                </td>
+                <label class="form-label"  >Naziv</label>
+                  <td>  
+                    <input type="text" th:field="${product.name}" class="form-control" placeholder="Naziv" id="product_name" readonly />
+                </td>
+                <label class="form-label"  >Cena</label>
+                <td>  
+                    <input type="text" th:field="${product.price}" class="form-control" placeholder="Cena" id="product_price" readonly/>
+                </td>
+                <label class="form-label"  >Jedinica mere</label>
+                <td>  
+                    <input type="text" th:field="${product.uom}" class="form-control" placeholder="Jedinica mere" id="product_uom" readonly/>
+                </td>
+                <label class="form-label" >Rok trajanja</label>
+                <td>  
+                    <input type="text" th:field="${product.exp_date}" class="form-control" placeholder="Rok trajanja" id="product_expdate" readonly />
+                </td>
+                <label class="form-label" >Poreska oznaka</label>
+                <td>  
+                    <input type="text" th:field="${product.tax_symbol}" class="form-control" placeholder="Poreska oznaka" id="product_taxsymbol" readonly/>
+                </td>
+                <label class="form-label" >Poreska stopa</label>
+                <td>  
+                    <input type="text" th:field="${product.tax_rate}" class="form-control" placeholder="Poreska stopa" id="product_taxrate" readonly/>
+                </td>
+                <label class="form-label" >Kolicina</label>
+                <td>  
+                    <input type="text"  class="form-control" placeholder="Kolicina" id="quantity" />
+                </td>
+            </tr>
+            <button type="button"  class="btn-primary mt-3" onclick="addRow()">Dodaj</button>
+            
+          
+           
+         </div>  
+    </form>
+<br><br>
+<h5>Ukupna cena=<span id="totalprice">0</span></h5>
+<table class="table table-bordered table-hover" id="table">
+  <thead class="thead-dark">
+    <tr>	<th>ID</th>
+            <th>Naziv</th>
+            <th>Cena</th>
+            <th>Jedinica mere</th>
+            <th>Rok trajanja</th>
+            <th>Poreska oznaka</th>
+            <th>Poreska stopa</th>
+            <th>Kolicina</th>
+            <th></th>
+   </tr>
+  </thead>
+  <tbody id="products">
+  
+  </tbody>
+  </table>
+  <div class="container">
+  <div class="row mb-3">
+  <div class="col-sm-5 mr-3" style="border:1px solid black;">
+  <h3 class="pt-3">Dodaj novog kupca:</h3>
+ <form name='customerform' action="/saveCustomer" method='POST'>
+      <table>
+         <tr>
+            
+            <td><input type="text" name="id" id="customer_id" hidden value="999999"></td>
+         </tr>
+         <tr>
+            <td>Ime:</td>
+            <td><input type="text" name="name" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>Naziv firme:</td>
+            <td><input type="text" name="company" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>PIB:</td>
+            <td><input type="text" name="pib" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>Adresa:</td>
+            <td><input type="text" name="address" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>Maticni broj:</td>
+            <td><input type="text" name="companynum" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>E-mail:</td>
+            <td><input type="text" name="email" class="form-control"/></td>
+         </tr>
+         <tr>
+            <td><input name="submit" type="submit" value="Dodaj kupca" class="btn-primary" /></td>
+         </tr>
+      </table>
+  </form></div>
+  <div class="col-sm-5" style="border:1px solid black;">
+
+  
+  <form name='purchaseform' action="/savePurchase" method='POST'>
+  <span id="customerAdded_id"><th:block th:text="${customerId}"></th:block></span>
+  <h3 class="pt-3">Naplata:</h3>
+      <table>
+         <tr>
+            
+            <td><input type="text" name="id" id="purchase_id" hidden value="999999"></td>
+         </tr>
+         <tr>
+            <td>Kasir id:</td>
+            <td><input type="text" name="cashier" id="purchase_cashierid" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>Datum:</td>
+            <td><input type="text" name="date" id="purchase_date" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>Vreme:</td>
+            <td><input type="text" name="time" id="purchase_time" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>Proizvodi:</td>
+            <td><input type="text" name="products" id="purchase_products" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>Kolicine:</td>
+            <td><input type="text" name="quantity" id="purchase_quantity" class="form-control"/></td>
+         </tr>
+          <tr>
+            <td>Ukupno:</td>
+            <td><input type="text" name="total" id="purchase_total" class="form-control"/></td>
+         </tr>
+         <tr>
+            <td>Kupac id:</td>
+            <td><input type="text" name="customer" id="purchase_customerid" class="form-control" /></td>
+         </tr>
+         <tr>
+            <td>Uplaceno:</td>
+            <td><input type="text" name="paid" id="purchase_paid" class="form-control"/></td>
+         </tr>
+         <tr>
+            <td><input name="submit" type="submit" value="Naplati" class="btn-primary mb-3" />
+            <button type="button"  class="btn-primary" onclick="customerSave()">Učitaj</button></td>
+         </tr>
+      </table>
+  </form>
+  </div>
+  </div>
+  </div>
+</div>
+<script src="script.js"></script>
+
+</body>
+</html>
